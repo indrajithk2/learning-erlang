@@ -110,10 +110,32 @@ Let us now proceed to compute the mean.
 
 @d Mean of numbers
 @{
-mean(L) -> total(L)/listsize(L).
+mean(L) ->
+    case (listsize(L)) of
+        0 -> 0;
+        X when X > 0 -> total(L)/listsize(L)
+    end.
 @}
 
 I feel that empty list can be taken care here. Anyway, 
 lets run this for now. 
+
+
+I had some problem writing the function using 
+    {\tt case}. Finally I read LYSE to clarify
+    it. Some interesting misunderstanding I had
+    is case cannot use a custom function. Here, I 
+    am using {\tt listsize(L)}.  
+
+I feel that LYSE is a great book, which explains
+the intricacies. I should read it. I just understood
+what a guard really is. What ever is there to the 
+right of when is a guard. 
+
+The chapter on Pattern Matching from LYSE is great.
+It clearly talks about guard, if, and case of. This
+could be a great reference.
+
+
 
 \end{document}
