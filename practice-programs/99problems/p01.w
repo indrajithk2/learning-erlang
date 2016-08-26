@@ -114,9 +114,9 @@ mul_bind() ->
 
 \section{Program}
 
-@o p01.erl
+@o p04.erl
 @{
--module(p01).
+-module(p04).
 -export([element_at_pos/2]).
 
 traverse_list([H|_], E, _, I) when I =:= E ->
@@ -131,6 +131,19 @@ The solution above is not exactly what is
 in the problem. But it is a generalized
 solution to extract element from a given 
 position.
+
+@o p01.erl
+@{
+-module(p01).
+-export(last_element/1).
+
+traverse_list([H|T],H)->traverse_list(T,H);
+traverse_list([],H)->{H}.
+
+last_element(L) -> traverse_list(L,0).
+
+@}
+
 
 
 
