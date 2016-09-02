@@ -89,12 +89,125 @@ are the unvisited ones.
 
 @d Overall Code
 @{
-@<Create Visited and Unvisted Vertex List@>
+@<Create Visited and Unvisited Vertex List@>
 @<Get Connected Vertices given a vertex@>
 @<Get the Vertex with minimum cost among the connected vertices@>
 @<Remove the lowest score vertex from unvisted list@>
 @<Assign the connected vertices with new scores@>
 @<Repeat getting connected vertices till target is reached@>
 @}
+
+
+\subsection{Visited and Unvisited Vertex List}
+As a thought process, I was thinking how LP helps
+structuring thoughts. That was the experiment I 
+started to do with this exercise. Every book talks
+about breaking a bigger problem in small sub-problems
+and tackle that. LP can help here. In the above section
+The overall code flow is described as I am able to think.
+No code is written, but I can roughly know what all has
+to be created. In a way this is the process of splitting
+the big problem into smaller tasks. Now I can pick the 
+tasks in any particular order and start working on it. 
+
+This sub section deals with Visited and Unvisited Vertex 
+list. The requirement is that through out the program
+execution, the Visited and Unvisited list undergoes 
+changes depending on the vertex selected based on lowest
+cost. To start with except for the start vertex, every other
+vertex belongs to unvisited vertex. 
+
+This can be implemented with simple list insertion and
+removal method. List removal can be done with list 
+comprehension and list insertion. 
+
+@d Create Visited and Unvisited Vertex List
+@{
+updtd_vstd_vx(Old_Vs,New_V)->[New_V|Old_Vs].
+updtd_unvstd_vx(Old_Vs,Vstd_V)->[Vs||Vs<-Old_Vs,Vs =/=Vstd_V].
+@}
+
+\section{Find Connected Vertices}
+This is an interesting function to implement. The implementation
+depends on the way the vertices are represented. I have the 
+idea to represent the vertices as a list containing three 
+elements. The first and second element are vertex names and the 
+last element is the cost. So a vertex can be represented as
+\[A,B,20\]. A and B corresponds to the vertices and 20 is the 
+cost of the edge connecting A and B. 
+
+Now, to find all the connected vertices given a vertex
+is to find the occurance of the given vertex among all the 
+vertices that constitues a graph. This will be a brute-force
+method. For now it should be OK. 
+
+\subsection{Strategy}
+Available data are the graph which is nothing but a list 
+of vertices and a given vertex for which all the connected
+vertex has to be found. To find a particular vertex is present
+in the each vertex, both the vertex contained in the edge has 
+to be checked. So, each edge has to be traversed and checked. 
+I thing a list comprehension should be able to do that. 
+
+@d Get Connected Vertices given a vertex
+@{
+lst_of_cnntd_vtxs(Gph,Vtx)->
+    [[Vtx1,Vtx2,ED]||[Vtx1,Vtx2,ED]<-Gph,
+     Vtx1 =:= Vtx orelse Vtx2 =:= Vtx].
+@}
+
+I feel that, I have to still understand list comphrehensions
+better. Probably with more practice it will be clearer.
+
+Now, get the connected vertex with minimum cost. As of now, 
+no vertex is assigned any value. To start with the starting
+vertex will be assigned a value of zero. Before to that a 
+representation is required for each vertex to assign a score
+to each vertex. This can be accomplished by a list with 
+name as the first element and score as the second element. It
+will be of the form \[a,20\]. In this case, ``a'' is the vertex
+name and ``20'' is the assigned value. At any given point there
+will be a list of score list. This list will be updated 
+every time new vertex is visited. 
+
+How is the vertices belonging to the shortest path determined.
+Once the vertex is decided as the least cost one, then the
+edge with the current vertex and the shortest cost has to
+be appended to the ``shortest path list''.
+
+The termination condition will be when the targetted vertex
+is reached. 
+
+To proceed a list with vertex and score has to be created. 
+This vertex will be worked on repeatedly by determining the
+least cost vertex from it. After finding the least cost
+vertex the edge is stored, and the least cost vertex 
+is inserted in the visited vertex list and removed from 
+the unvisited list. This list is maintained since 
+from a given vertex visiting a visited vertex should not
+happen. Hence after getting the connected vertex list, 
+any vertex which appears in the visited vertex list 
+has to be checked and removed. 
+
+So, I can now imagine that a single iteration of the 
+program has to do a lot. 
+
+\begin{enumerate}
+\item Get the connected vertices list.
+\item Check if there are any visted vertex in list, if so remove it.
+\item Determine the least cost vertex. 
+\item Add the least cost vertex into visited vertex list.
+\item Remove the same from unvisted vertex list.
+\item Store the edge between the current vertex and the least cost
+vertex into shortest path edge list.
+\item With the least cost vertex repeat the process.
+\item Repeat this till the target vertex is reached. 
+\end{enumerate}
+
+
+Now I have clarity on how to implement.  
+
+
+
 
 
