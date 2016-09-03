@@ -205,9 +205,54 @@ vertex into shortest path edge list.
 \end{enumerate}
 
 
-Now I have clarity on how to implement.  
+Now I have clarity on how to implement.  Over the night, I was thinking
+the number of parameters that will be required for the 
+function that will implement the dijkstra's algorithm. That is
+going to be many. I am not very happy about the number of
+parameters, but that will be required anyway. But externally there
+the users is supposed to provide only the graph, start and end vertex. 
 
+The parameters that will be required to be passed will the following.
 
+\begin{enumerate}
+\item Input Graph
+\item Start Vertex
+\item End Vertex
+\item Visited Vertex List
+\item UnVisited Vertex List
+\item Current Vertex
+\item Shortest path edge list
+\end{enumerate}
 
+Let me now proceed with coding the function which 
+implements the dijkstra's algorithm.
+
+@d Get the Vertex with minimum cost among the connected vertices
+@{
+@<Calculate minimum cost vertex among connected vertices@>
+
+nxt_min_cst_vtx(Gph,CurrVtx,VtxScrs)->
+  Cnntd_Vtx  = lst_of_cnntd_vtxs(Gph,CurrNd),
+  min_cst_vtx(Cnntd_Vtx,VtxScrs).
+@}
+
+CV is the connected vertex list and VS is the vector score
+list. Connected Vertex list will be of the form 
+\[a,b,c\] and VS will be of the format \[[a,20],[b,30],[c,60],[d,50]\].
+Now the task is to get the the element of VS which contains either 
+a, b or c for which the score is minimum. In case if there are 
+two vertex with same value, then any of the vertex will be 
+taken to proceed. This has to be analyzed later what should be
+the right approach. 
+
+@d Calculate minimum cost vertex among connected vertices 
+@{
+min_cst_vtx(CV,VS)->.
+@}
+
+Check has to be performed whether elements in CV appears in 
+VS or not. CV and VS are both list. So the problem is how 
+to check if elements of one list appears in the sub list of
+the other or not. This is can tried as an independent problem. 
 
 
