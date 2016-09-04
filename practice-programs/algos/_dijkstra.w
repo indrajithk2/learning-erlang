@@ -247,8 +247,34 @@ the right approach.
 
 @d Calculate minimum cost vertex among connected vertices 
 @{
-min_cst_vtx(CV,VS)->.
+min_cst_vtx(CV,VS)-> 
+    %%Extract the element from VS to check against CV
+    VS_Elms = [[X,Y]||[X,Y]<-VS,st_e_in_l(X,CV)],
+    %% Get the minimum Vertex with minimum score
+    min_cst_vtx1(VS_Elms,[]).
+
+min_cst_vtx1([H|T],Acc)->
+    [_,ScV] = H,
+    [_,ScL] = Acc,
+    if 
+        %% There should be an elegant way
+        ScL >= ScV ->min_cst_vtx1(T,ScV);
+        ScV >= ScL -> min_cst_vtx1(T,ScL)
+    end,
+min_cst_vtx1([],Acc)->Acc.
+
+%% Status of element E is in list L
+st_e_in_l(E,[H|T])->
+    if 
+        H =:= E -> true;
+        st_e_in_l(E,T)
+    else.
+    
+
+
 @}
+
+
 
 Check has to be performed whether elements in CV appears in 
 VS or not. CV and VS are both list. So the problem is how 
