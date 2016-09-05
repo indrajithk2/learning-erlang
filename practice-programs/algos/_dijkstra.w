@@ -52,7 +52,7 @@ Here \texttt{A} and \texttt{B} represent the vertices and the
 last element denotes the distance. This way we can represent a 
 graph. For example a square can be represented as 
 
-\texttt{\[ \[A,B,20\], \[B,C,20\], \[C,D,20\],\[D,A,20\] \]}
+%%\texttt{\[\[A,B,20\], \[B,C,20\], \[C,D,20\],\[D,A,20\] \]}
 
 \section{Strategy}
 
@@ -245,40 +245,41 @@ two vertex with same value, then any of the vertex will be
 taken to proceed. This has to be analyzed later what should be
 the right approach. 
 
+Check has to be performed whether elements in CV appears in 
+VS or not. CV and VS are both list. So the problem is how 
+to check if elements of one list appears in the sub list of
+the other or not. This is can tried as an independent problem. 
+
 @d Calculate minimum cost vertex among connected vertices 
 @{
 min_cst_vtx(CV,VS)-> 
     %%Extract the element from VS to check against CV
     VS_Elms = [[X,Y]||[X,Y]<-VS,st_e_in_l(X,CV)],
     %% Get the minimum Vertex with minimum score
-    min_cst_vtx1(VS_Elms,[]).
+    min_cst_vtx1(VS_Elms,["",1000]).
 
 min_cst_vtx1([H|T],Acc)->
     [_,ScV] = H,
     [_,ScL] = Acc,
     if 
         %% There should be an elegant way
-        ScL >= ScV ->min_cst_vtx1(T,ScV);
-        ScV >= ScL -> min_cst_vtx1(T,ScL)
-    end,
+        ScL >= ScV ->min_cst_vtx1(T,H);
+        ScV >= ScL -> min_cst_vtx1(T,Acc)
+    end;
 min_cst_vtx1([],Acc)->Acc.
 
 %% Status of element E is in list L
 st_e_in_l(E,[H|T])->
     if 
         H =:= E -> true;
-        st_e_in_l(E,T)
-    else.
-    
-
-
+        H =/= E -> st_e_in_l(E,T)
+    end;
+st_e_in_l(_,[])->false.
 @}
 
+As next step, the edges corresponding to the visited 
+vertex has to be stored. This will be final solution.
 
 
-Check has to be performed whether elements in CV appears in 
-VS or not. CV and VS are both list. So the problem is how 
-to check if elements of one list appears in the sub list of
-the other or not. This is can tried as an independent problem. 
 
 
