@@ -280,6 +280,16 @@ st_e_in_l(_,[])->false.
 As next step, the edges corresponding to the visited 
 vertex has to be stored. This will be final solution.
 
+Once the nearest vertex is found the edge can be 
+determined by knowing the current vertex and the 
+nearest one. 
+
+As a result of finding the shortest vertex, the value
+of the vertex may change if the value stored is greater
+than the computed value of the vertex. The computed value
+is the sum of the value of the current vertex and the 
+edge distance.
+
 
 
 
