@@ -290,6 +290,10 @@ than the computed value of the vertex. The computed value
 is the sum of the value of the current vertex and the 
 edge distance.
 
+One more important thing I learnt here, that problem
+solving is about representing the problem -- this can 
+be the data structures. Then the algos that can work 
+on these data structures to solve the problem,
 
 
 
