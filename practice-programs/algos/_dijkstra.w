@@ -295,5 +295,12 @@ solving is about representing the problem -- this can
 be the data structures. Then the algos that can work 
 on these data structures to solve the problem,
 
+Till now we don't have a list vertex and scores. We 
+have to maintain such a list. The structure of 
+the element will be of the form vertex name, score. 
+Initially the score of all the vertex will set at a high
+value say, 1000. The score of the start vertex will be 
+0. From there the program starts. 
 
+@d Initialize the vertex scores.
 
