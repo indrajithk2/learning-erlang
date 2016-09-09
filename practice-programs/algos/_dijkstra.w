@@ -303,4 +303,15 @@ value say, 1000. The score of the start vertex will be
 0. From there the program starts. 
 
 @d Initialize the vertex scores.
+@{
+@<Get all the vertices from the Graph@>
+@<Assign all the vertices a big value@>
+@<Update the vertex with the new value@>
+@}
 
+
+@d Update the vertex with the new value
+@{
+updt_vrtx_scr(VScr,Vtx)->
+    [[V,S]||[V,S]->VScr,V=:=Vtx].
+@}
