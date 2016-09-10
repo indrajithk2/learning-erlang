@@ -310,8 +310,23 @@ value say, 1000. The score of the start vertex will be
 @}
 
 
+@d Get all the vertices from the Graph
+@{
+vrtx_of_graph(Graph) ->
+    [V||[V,E,S]<-Graph];
+vrtx_of_graph([]) -> [].
+@}
+
+
 @d Update the vertex with the new value
 @{
-updt_vrtx_scr(VScr,Vtx)->
-    [[V,S]||[V,S]->VScr,V=:=Vtx].
+updt_vrtx_scr(VScr,Vtx,Scr)->
+    [[V,Scr]||[V,S]->VScr,V=:=Vtx].
 @}
+
+The above function just does an update. 
+When V is the Vtx to be updated then the score
+will be updated to Scr. 
+
+
+
