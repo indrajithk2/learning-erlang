@@ -304,16 +304,15 @@ value say, 1000. The score of the start vertex will be
 
 @d Initialize the vertex scores.
 @{
-@<Get all the vertices from the Graph@>
-@<Assign all the vertices a big value@>
+@<Get all the vertices from the Graph and initialize@>
 @<Update the vertex with the new value@>
 @}
 
 
-@d Get all the vertices from the Graph
+@d Get all the vertices from the Graph and initialize
 @{
 vrtx_of_graph(Graph) ->
-    [V||[V,E,S]<-Graph];
+    [[V,1000]||[V,E,S]<-Graph];
 vrtx_of_graph([]) -> [].
 @}
 
