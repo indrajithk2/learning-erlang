@@ -328,4 +328,43 @@ When V is the Vtx to be updated then the score
 will be updated to Scr. 
 
 
+\section{Putting it all together}
+Just to recap here is the code flow.
 
+\begin{itemize}
+    \item Initialize all the vertex
+    \item Initialize the Visited and Unvisited vertex list
+    \item Find the nearest vertex
+    \item Update the Visited and Unvisted vertex list
+    \item Update the Vertex Scores
+    \item Check the target vertex has reached or not
+    \item Continue once again, if target hasn't reached, other
+    wise end here.
+\end{itemize}
+
+Also, lets see what is the input and output. The user can give
+the graph, start vertex and target vertex as inputs. The return
+should be set of edges representing the shortest path. It may
+need not be in the same order though. Also, it should also 
+return the exact value of the shortest path.
+
+@d Final Program
+@{
+-module(djikstra).
+-export([shortest_path/3]).
+
+shortest_path(Graph, StartVertex, TargetVertex) ->
+    %% All the initialization can happen here.
+    VisitedVertices = ,
+    UnVisitedVertices = ,
+    VertexScores = ,
+    ShortestPath = ,
+    shortest_path(Graph,
+                  StartVertex,
+                  TragetVertex,
+                  VisitedVertices,
+                  UnVisitedVertices,
+                  VertexScores,
+                  ShortestPath).
+
+@}
