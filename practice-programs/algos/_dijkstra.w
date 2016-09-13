@@ -309,6 +309,24 @@ value say, 1000. The score of the start vertex will be
 @}
 
 
+@d Initialize unvisited vertices
+@{
+un_vstd_vrtx(Graph,StartVertex)->
+    LstWithDups = [V||[V1,V2,_]<-Graph, V1 =/= StartVertex],
+    UnqLstOfVrtx = remove_dups(LstWithDups).
+
+remove_dups(L) -> 
+    remove_dups(L,[]).
+
+remove_dups([H|T],[])->
+    remove_dups(T,[H]);
+remove_dups([H|T],UL)->
+    L = [E||E<-UL,E =/= H],
+    remove_dups(T,L);
+remove_dups([],_)->UL.
+@}
+
+
 @d Get all the vertices from the Graph and initialize
 @{
 vrtx_of_graph(Graph) ->
@@ -355,10 +373,10 @@ return the exact value of the shortest path.
 
 shortest_path(Graph, StartVertex, TargetVertex) ->
     %% All the initialization can happen here.
-    VisitedVertices = ,
-    UnVisitedVertices = ,
-    VertexScores = ,
-    ShortestPath = ,
+    VisitedVertices = [] ,
+    UnVisitedVertices = un_vstd_vrtx(Graph,StartVertex) ,
+    VertexScores = vrtx_of_graph(Graph) ,
+    ShortestPath = [],
     shortest_path(Graph,
                   StartVertex,
                   TragetVertex,
