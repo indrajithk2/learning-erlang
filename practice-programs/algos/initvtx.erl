@@ -2,8 +2,15 @@
 -export([un_vstd_vrtx/2,remove_dups/1]).
 
 un_vstd_vrtx(Graph,StartVertex)->
-    LstWithDups1 = [V1||[V1,V2,_]<-Graph, V1 =/= StartVertex, V2 =/= StartVertex],
-    remove_dups(LstWithDups1).
+        un_vstd_vrtx(Graph,StartVertex,[]).
+
+un_vstd_vrtx([],_,[])->[];
+un_vstd_vrtx([H|T],StartVertex,Acc)->
+    [V1,V2,_] = H,
+    un_vstd_vrtx(T,StartVertex,[V1,V2|Acc]);
+un_vstd_vrtx([],StartVertex,Acc)->
+    StartVertexRemoved = [V||V<-Acc,V =/= StartVertex],
+    remove_dups(StartVertexRemoved).
 
 remove_dups(L) -> 
     remove_dups(L,[]).
