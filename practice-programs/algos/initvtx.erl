@@ -8,18 +8,18 @@ un_vstd_vrtx(Graph,StartVertex)->
 remove_dups(L) -> 
     remove_dups(L,[]).
 
-remove_dups([H|T],UL)->
-    if 
-        UL =:= [] -> remove_dups(T,[H]);
-        true ->
-                ST = elem_in_list(H,UL),
-            if 
-                ST =:= true
-                        -> remove_dups(T,UL);
-                true -> remove_dups(T,[H|UL])
-            end
-    end;
-remove_dups([],L)->L.
+remove_dups([H|T],[])->
+    remove_dups(T,[H]);    
+    remove_dups([H|T],UL)->
+        remove_dups([H|T],UL,elem_in_list(H,UL));
+    remove_dups([],UL)->UL.
+
+remove_dups([_|T],UL,true)->
+    remove_dups(T,UL);
+remove_dups([H|T],UL,false)->
+remove_dups(T,[H|UL]);
+remove_dups([],UL,_)->UL.
+
 
 elem_in_list(E,[H|T])->
     if 
