@@ -232,7 +232,7 @@ implements the dijkstra's algorithm.
 @<Calculate minimum cost vertex among connected vertices@>
 
 nxt_min_cst_vtx(Gph,CurrVtx,VtxScrs)->
-  Cnntd_Vtx  = lst_of_cnntd_vtxs(Gph,CurrNd),
+  Cnntd_Vtx  = lst_of_cnntd_vtxs(Gph,CurrVtx),
   min_cst_vtx(Cnntd_Vtx,VtxScrs).
 @}
 
@@ -252,12 +252,21 @@ the other or not. This is can tried as an independent problem.
 
 @d Calculate minimum cost vertex among connected vertices 
 @{
+
+%% PARAMETERS : CV --- Connected Vertices
+%%              VS --- Vertex Scores. 
+
+%% RETURN : List [A,B] A --- Vertex name, B --- Vertex Score
+%%          This is the vertex with lowest score among CV
+
 min_cst_vtx(CV,VS)-> 
     %%Extract the element from VS to check against CV
     VS_Elms = [[X,Y]||[X,Y]<-VS,st_e_in_l(X,CV)],
     %% Get the minimum Vertex with minimum score
     min_cst_vtx1(VS_Elms,["",1000]).
 
+%% ScV --- Score of Current Vertex
+%% ScL --- Score Lowest So far
 min_cst_vtx1([H|T],Acc)->
     [_,ScV] = H,
     [_,ScL] = Acc,
@@ -276,6 +285,15 @@ st_e_in_l(E,[H|T])->
     end;
 st_e_in_l(_,[])->false.
 @}
+
+Update : 14-Sep-2016
+Just now, I understand that the algorithm to 
+choose the vertex among the neighbouting vertex
+is wrong. The way it should be done is that, all the 
+neighbouring vertices should be updated, and then 
+lowest among them has to be selectd. This has to be 
+corrected before I can proceed. 
+
 
 As next step, the edges corresponding to the visited 
 vertex has to be stored. This will be final solution.
@@ -312,18 +330,38 @@ value say, 1000. The score of the start vertex will be
 @d Initialize unvisited vertices
 @{
 un_vstd_vrtx(Graph,StartVertex)->
-    LstWithDups = [V||[V1,V2,_]<-Graph, V1 =/= StartVertex],
-    UnqLstOfVrtx = remove_dups(LstWithDups).
+        un_vstd_vrtx(Graph,StartVertex,[]).
+
+un_vstd_vrtx([],_,[])->[];
+un_vstd_vrtx([H|T],StartVertex,Acc)->
+    [V1,V2,_] = H,
+    un_vstd_vrtx(T,StartVertex,[V1,V2|Acc]);
+un_vstd_vrtx([],StartVertex,Acc)->
+    StartVertexRemoved = [V||V<-Acc,V =/= StartVertex],
+    remove_dups(StartVertexRemoved).
 
 remove_dups(L) -> 
     remove_dups(L,[]).
 
 remove_dups([H|T],[])->
-    remove_dups(T,[H]);
-remove_dups([H|T],UL)->
-    L = [E||E<-UL,E =/= H],
-    remove_dups(T,L);
-remove_dups([],_)->UL.
+    remove_dups(T,[H]);    
+    remove_dups([H|T],UL)->
+        remove_dups([H|T],UL,elem_in_list(H,UL));
+    remove_dups([],UL)->UL.
+
+remove_dups([_|T],UL,true)->
+    remove_dups(T,UL);
+remove_dups([H|T],UL,false)->
+remove_dups(T,[H|UL]);
+remove_dups([],UL,_)->UL.
+
+
+elem_in_list(E,[H|T])->
+    if 
+        H =:= E -> true;
+        true -> elem_in_list(E,T)
+    end;
+elem_in_list(_,[])->false.
 @}
 
 
@@ -338,12 +376,33 @@ vrtx_of_graph([]) -> [].
 @d Update the vertex with the new value
 @{
 updt_vrtx_scr(VScr,Vtx,Scr)->
-    [[V,Scr]||[V,S]->VScr,V=:=Vtx].
+    [[V,Scr]||[V,S]<-VScr,V=:=Vtx].
 @}
 
 The above function just does an update. 
 When V is the Vtx to be updated then the score
 will be updated to Scr. 
+
+I think, this is not the function we need. Rather, 
+after getting the nearest vertex we have to update
+nearest vertex. The updated vertex score of the 
+nearest vertex will be the sum of current score and
+the edge value. The input we will have will be the 
+current vertex, nearest vertex and current vertex
+scores. Using these two inputs
+the nearest vertex has to be updated. The current value
+of the vertex can be obtained from the vertex scores. Then
+edge value has to be found out from the two vertex we
+have. Finally the vertex scores has to be updated. The 
+output of the function will be the updated list of 
+vertex scores. What is missing here is to find the 
+the edge value given the two vertex names. But, wait 
+a min, isn't that information available while 
+computing the nearest vertex?
+
+
+ 
+
 
 
 \section{Putting it all together}
@@ -373,6 +432,7 @@ return the exact value of the shortest path.
 
 shortest_path(Graph, StartVertex, TargetVertex) ->
     %% All the initialization can happen here.
+    CurrentVertex = StartVertex,
     VisitedVertices = [] ,
     UnVisitedVertices = un_vstd_vrtx(Graph,StartVertex) ,
     VertexScores = vrtx_of_graph(Graph) ,
@@ -380,9 +440,34 @@ shortest_path(Graph, StartVertex, TargetVertex) ->
     shortest_path(Graph,
                   StartVertex,
                   TragetVertex,
+                  CurrentVertex,
                   VisitedVertices,
                   UnVisitedVertices,
                   VertexScores,
                   ShortestPath).
+@<Inner shortest path function@>
+@}
 
+
+This function is the real function call. Here are the inputs.
+\begin{itemize}
+    \item G --- The original Graph --- [[V1,V2,D],...]
+    \item SV --- Start Vertex --- V1
+    \item TC --- Target Vertex --- V2
+    \item CV --- Current Vertex --- Vn
+    \item VV --- Visited Vertices --- [V1...Vn]
+    \item UVV --- UnVisited Vertices --- [UV1...UVn]
+    \item VS --- Vertex Scores --- [[V,S],...]
+    \item SP --- Shortest Path [[V1,V2],...]
+\end{itemize}
+
+@d Inner shortest path function
+@{
+shortest_path(G,SV,TV,CV,VV,UVV,VS,SP)->
+    %% Get the connected vertices
+    Conntd_Vrtxs = lst_of_cnntd_vtxs(G,CV),
+    %% Get the nearest vertex
+    Nrst_Vrtx = nxt_min_cst_vtx(G,CV,VS),
+    CurrVrtx = Nrst_Vrtx,
+    UpdatedVrtxScrs = updt_vrtx_scr(VertexScores,Nrst_Vrtx,),
 @}
