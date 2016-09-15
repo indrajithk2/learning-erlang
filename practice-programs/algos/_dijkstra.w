@@ -294,7 +294,6 @@ neighbouring vertices should be updated, and then
 lowest among them has to be selectd. This has to be 
 corrected before I can proceed. 
 
-
 As next step, the edges corresponding to the visited 
 vertex has to be stored. This will be final solution.
 
@@ -401,7 +400,54 @@ a min, isn't that information available while
 computing the nearest vertex?
 
 
- 
+\section{Correction to Algorithm}
+Earlier approach was not updating all the connected
+edges. It is corrected here. 
+
+\subsection{Code Flow}
+We start with a vertex. All the connected vertex to 
+the given vertex is computed from the Graph. Now the 
+vertex scores are computed from the edge value the 
+current vertex value. Current vertex value is 
+available in the vertex scores. If the computed values
+is less than the existing values, those are updated.
+
+\section{Function Design} 
+
+Let me think of the functions that will be required.
+The main function is supposed to update the vertex 
+values of connected vertices. 
+
+\subsection{Function -- Update Vertex Values}
+
+The inputs to the function will be the Graph, 
+the current Vertex, Current Vertex Scores. The output
+will be the nearest vertex and updated vertex scores. 
+
+\subsubsection{Data Structures}
+Graph will have the structure as defined else where 
+in the document. Vertex will be a atom. Vertex scores
+will be a list of list. The elements will be an atom
+and the scores. 
+
+\subsection{Initialization}
+To start with, except for the the start vertex, all other
+vertex is assigned a very big value. Here, I will take 
+1000 as a big value and assign it. The start vertex will 
+be assigned a value of zero. The vertex scores is a data 
+structure that has to be initialized first. 
+
+\subsection{Computation}
+We need to compute the connected vertices from the 
+Graph, given a vertex. Also, given two vertex, the edge
+value has to be computed from the Graph. Functions has
+to be written for that. 
+
+
+
+
+
+
 
 
 
