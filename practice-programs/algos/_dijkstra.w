@@ -444,6 +444,29 @@ value has to be computed from the Graph. Functions has
 to be written for that. 
 
 
+\section{Code}
+This has taken a while to write. It is not that the 
+algorithm took so much time. There was different 
+thought process which got me diverted from the core 
+issue. Looking back, I feel those were for good. I 
+would have just got away by writing algorithm as in the 
+past. But, I gave a good though on program design and
+literate programming. I now think, I have some idea
+on how to go about literate programming. 
+
+Coming back to the topic, the above section describes
+the code flow in general. Now let us see how to convert
+that to high level LP fragments.
+
+
+@d Find and update nearest neighbours
+@{
+@<Get all connected vertices that are not visited@>
+@<Update all the vertex scores@>
+@<Find the vertex with least score@>
+@<Put the least score vertex into visited vertex list@>
+@<Continue the process till the target vertex is found@>
+@}
 
 
 
