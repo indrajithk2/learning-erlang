@@ -468,6 +468,23 @@ that to high level LP fragments.
 @<Continue the process till the target vertex is found@>
 @}
 
+\section{Find and update nearest neighbours}
+
+To start with we will have a vertex. The vertex will 
+of the form [<name-vertex>,<score>]. So from the graph, 
+which is the in the format [[<name-v1>,<name-v2>,edge-length]]
+we have to find the whether <name-vertex> appears in
+either <name-v1> or <name-v2>. After checking all the 
+elements in the Graph, we have to get the list elements
+that has either of the element.  So, we should get a
+list of vertex of the form [<vertex-name>, ....]
+
+\subsection{Update all the vertex scores}
+Once all the connected vertex is obtained, then we need
+to get the vertex score list. The vertex score list
+has to be upated based on the computed scores.
+
+
 
 
 
