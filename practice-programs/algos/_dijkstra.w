@@ -482,14 +482,39 @@ list of vertex of the form [<vertex-name>, ....]
 \subsection{Update all the vertex scores}
 Once all the connected vertex is obtained, then we need
 to get the vertex score list. The vertex score list
-has to be upated based on the computed scores.
+has to be upated based on the computed scores. The scores
+are computed by adding the score of the start vertex
+and the edge value. 
+
+The input to the function will be the vertex scores, 
+connected vertices and start vertex. 
+
+Vertex Scores -- [[<name>,<score>],...] 
+
+Connected Vertices -- [<name>,...]
+
+Start Vertex -- <name>
+
+Graph
+
+Output
+
+The output will the updated Vertex Score list. 
+
+Algorithm
+
+Traverse the vertex scores, and check if they belong
+to the connected vertices. If yes, then get the 
+edge value from the Graph. I feel that it should be a
+separate function. After getting the edge value, new
+vertex score has to be computed. A comparison has to 
+be made if the new value is lesser than the already
+existing value. If so, it has to be updated. This has
+to be done for all the connected vertices.
 
 
 
-
-
-
-
+\subsection
 
 \section{Putting it all together}
 Just to recap here is the code flow.
