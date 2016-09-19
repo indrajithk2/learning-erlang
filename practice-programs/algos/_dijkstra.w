@@ -514,6 +514,15 @@ to be done for all the connected vertices.
 
 
 
+I am quite delighted after hearing Joe talking about
+the box methodology. I was strangely surprised whether
+I was thinking too elementary because of my inexperience
+in programming at higher levels. But it holds good very 
+well. Think of the inputs and outputs, and the relationship
+between those, and you can then have the code ready. Cool!
+ 
+
+
 \subsection
 
 \section{Putting it all together}
