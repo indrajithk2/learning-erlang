@@ -342,11 +342,12 @@ un_vstd_vrtx([],StartVertex,Acc)->
 remove_dups(L) -> 
     remove_dups(L,[]).
 
-remove_dups([H|T],[])->
+%% Surprinsingly I don't understand the logic
+remove_dups([H|T],[])-> %% This is the start condition
     remove_dups(T,[H]);    
-    remove_dups([H|T],UL)->
+    remove_dups([H|T],UL)-> %% UL stands for unique list
         remove_dups([H|T],UL,elem_in_list(H,UL));
-    remove_dups([],UL)->UL.
+    remove_dups([],UL)->UL. %%Finally when input list is empty, time to stop
 
 remove_dups([_|T],UL,true)->
     remove_dups(T,UL);
@@ -512,14 +513,17 @@ be made if the new value is lesser than the already
 existing value. If so, it has to be updated. This has
 to be done for all the connected vertices.
 
-
-
 I am quite delighted after hearing Joe talking about
 the box methodology. I was strangely surprised whether
 I was thinking too elementary because of my inexperience
 in programming at higher levels. But it holds good very 
 well. Think of the inputs and outputs, and the relationship
 between those, and you can then have the code ready. Cool!
+
+While I have to complete writing the code, which is just
+a few minutes of effort, I am glad that I can now confidently
+write literate programs. That was the greatest benefit got
+with this exercise. 
  
 
 
