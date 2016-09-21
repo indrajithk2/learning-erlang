@@ -1,0 +1,8 @@
+Today, I started learning webmachine. It seems the HTTP 
+protocol is converted to a state machine. The user, needs
+just plug the code where necessary to get it running. 
+I started with trying zotonic, and to some extent, I couldn't
+understand it. After a while I realized that I need to understand
+webmachine to make any progress in zotonic. I plan is to read the 3 day 
+plan as described in "Seven Web Frameworks in Seven Days".
+
