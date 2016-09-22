@@ -1,0 +1,25 @@
+\section{Philosophy of Webmachine}
+
+Webmachine presents HTTP protocol as a state machine. 
+It differs from other frameworks in that, it exposes 
+the complete HTTP, while others get away with routing
+requests via methods and URLs and to return a few types
+of responses. HTTP is capable of quite a lot, and is 
+often hidden from the developer. Webmachine on the 
+other hand offers the developer to utilize the entire 
+HTTP in a convenient way. There are no frameworks that
+has attempted to expose HTTP this way, which makes 
+this unique. Few of the HTTP capabilites are 
+content negotiation, encodings, and caching. They are
+almost non existent in other frameworks. 
+
+
+
+
+
+
+
+
+
+
+
