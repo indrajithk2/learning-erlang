@@ -13,6 +13,86 @@ this unique. Few of the HTTP capabilites are
 content negotiation, encodings, and caching. They are
 almost non existent in other frameworks. 
 
+Webmachine doesn't require to remember various status
+code of HTTP. 
+
+\section{Getting started with Webmachine}
+
+\begin{verbatim}
+webmachine/scripts/new_webmachine.sh hello
+make
+\end{verbatim}
+
+To start webmachine 
+\begin{verbatim}
+./start.sh
+\end{verbatim}
+
+\subsection{Dispacth in Webmachine}
+\begin{verbatim}
+{[],hello_resource,[]}
+\end{verbatim}
+
+The first parameter is the the path. In this
+case it is the root path. The second parameter
+is the method. And the last one is the parameters
+to the hell0_resource. Here it is null. 
+
+\subsection{Resource Function}
+The point to note here is that, each of the 
+exported function of the resource is called
+by the webmachine to answer the questions 
+that will determine how the HTTP request is 
+processed. That will explain how to overide
+the default function implementaion.
+
+@d Hello Resource Erl
+@{
+-module(hello_resource).
+-export([init/1,to_html/2]).
+-include_lib("webmachine/include/webmachine.hrl").
+
+init([]) -> {ok,defined}.
+to_html(ReqData,State)->
+{"<html><body>Hello, World!</body></html>", ReqData,State}.
+@} 
+
+What is the importance of init function? 
+The init function sets up the state for the 
+request. This state will be threaded through 
+each of the resource function. This is a good
+way to pass information with some initialized 
+value. 
+
+One more interesting fact is that, the resource
+functions can change the state. Even though the 
+variables are immutable in Erlang, the resource
+function can send an updated state. This is cool!
+
+All resource functions return a three tuple result.
+They are the result, request_data and the new internal
+state. 
+
+The result of the content function. It is just
+mentioned that the content function is a 
+resource function. There is no specification on 
+the type of the result. Usually, as it is 
+mentioned in the book the result of the content 
+function can be either of a iolist which is a string, 
+a binary or a list of iolists. I am not clear
+how a binary an help here, and also a list of iolists. 
+This needs to be checked.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
