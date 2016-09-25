@@ -1,0 +1,13 @@
+About Templates
+----------------
+Any front face to latex templates through browser
+requires the user input to be converted to LaTeX.
+This will require changing the inputs to LaTeX, and 
+for the same reason will require templates. With out 
+templates, there will be a lot of hard coding that 
+has to be avoided. Using python for the task seems to
+be logical, as it has support for Jinja2. But, again
+interacting with Erlang and Python seems bit complex
+for the task. Another way is to use a Erlang template
+but, the choices are very limited. This needs to 
+be further investigated.  
