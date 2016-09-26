@@ -11,3 +11,12 @@ interacting with Erlang and Python seems bit complex
 for the task. Another way is to use a Erlang template
 but, the choices are very limited. This needs to 
 be further investigated.  
+
+
+Progress
+----------
+Till I have a proper knowledge of zotonic, I have 
+decided to develop a command line application 
+in erlang. 
+
+
