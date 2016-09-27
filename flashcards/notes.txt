@@ -19,4 +19,8 @@ Till I have a proper knowledge of zotonic, I have
 decided to develop a command line application 
 in erlang. 
 
+http://erlang.org/doc/apps/xmerl/xmerl_ug.html
+This has a good description of how to use XML. 
+I have to read that tomorrow. 
+
 
