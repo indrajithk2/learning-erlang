@@ -23,4 +23,6 @@ http://erlang.org/doc/apps/xmerl/xmerl_ug.html
 This has a good description of how to use XML. 
 I have to read that tomorrow. 
 
-
+After a quite of investigation, I think ConTeXt and
+LuaTex may be a better way to generate tex files 
+then hardcoding.
