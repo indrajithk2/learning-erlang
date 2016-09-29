@@ -26,3 +26,11 @@ I have to read that tomorrow.
 After a quite of investigation, I think ConTeXt and
 LuaTex may be a better way to generate tex files 
 then hardcoding.
+
+
+After further research, I think, it is beeter to use
+ConTeXt as it has in built XML support. So, the 
+server has to provide the XML to a context program, 
+and that can in turn generate the document based on
+requirements.
+
