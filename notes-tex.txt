@@ -1,0 +1,4 @@
+Today starting learning TeX. It is different. 
+The macro system is interesting. I am still to
+figure out how to control various elements of
+a page. Also, positioning is what I am interested.
