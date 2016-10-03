@@ -1,0 +1,11 @@
+Today starting learning TeX. It is different. 
+The macro system is interesting. I am still to
+figure out how to control various elements of
+a page. Also, positioning is what I am interested.
+
+
+LaTeX is quite interesting. It has a steep learning curve. 
+Understandig the concepts are very time consuming. 
+I think, I have to take up an exercise and then ponder
+on how to do that, by learning LaTeX / TeX every day. 
+It is going to be very tough. 
