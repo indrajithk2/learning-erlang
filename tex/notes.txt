@@ -9,3 +9,7 @@ Understandig the concepts are very time consuming.
 I think, I have to take up an exercise and then ponder
 on how to do that, by learning LaTeX / TeX every day. 
 It is going to be very tough. 
+
+I think, things are better now. I am able to parse an 
+XML using python, and it so easy. Now, the task is to 
+create an LaTeX file using jinja2.
